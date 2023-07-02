@@ -23,11 +23,19 @@
         </div>
         <div class="col-2">
           <ul>
-            <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
-            <router-link class="link" :to="{ name: 'Blogs' }"
+            <router-link
+              @click.native="scrollToTop"
+              class="link"
+              :to="{ name: 'Home' }"
+              >Home</router-link
+            >
+            <router-link
+              @click.native="scrollToTop"
+              class="link"
+              :to="{ name: 'Blogs' }"
               >Blogs</router-link
             >
-            <router-link v-if="user" class="link" :to="{ name: 'NewPost' }"
+            <router-link v-if="user" class="link" :to="{ name: 'CreatePost' }"
               >Create Post</router-link
             >
             <router-link v-if="!user" class="link" :to="{ name: 'Login' }"
@@ -55,10 +63,21 @@ export default {
     instagram,
     linkedin,
   },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
   data() {
-    return {
-      user: null,
-    };
+    return {};
+  },
+  methods: {
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // Sử dụng smooth scrolling để cuộn mượt hơn
+      });
+    },
   },
 };
 </script>
